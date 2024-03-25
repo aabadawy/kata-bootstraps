@@ -38,9 +38,11 @@ class FindModeInBSTTest extends TestCase
      */
     public function itShouldReturnModesValueForBST($root, $expected)
     {
+        $result = (new FindModeInBST())->findMode($root);
+        print_r($result);
         $this->assertEquals(
             $expected,
-            (new FindModeInBST())->findMode($root),
+            $result,
         );
     }
 
@@ -76,11 +78,23 @@ class FindModeInBSTTest extends TestCase
             return $root;
         };
 
+        $sharesSameFreqExample = function () {
+            $root = new Node(1, $leftNode = new Node(0, null, null),$rightNode = new Node(1, null, null));
+
+            $leftNode->left = new Node(0, new Node(0));
+            $leftNode->right = new Node(0, null, null);
+
+            $rightNode->left = new Node(1, null, null);
+            $rightNode->right = new Node(1, null, null);
+
+            return $root;
+        };
         return [
             [$exm1(),[2]],
             [$exm2(),[10]],
             [$exm3(), [2]],
             [$exm4(), [12]],
+            [$sharesSameFreqExample(), [0,1]],
         ];
     }
 }

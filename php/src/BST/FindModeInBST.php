@@ -18,17 +18,16 @@ class FindModeInBST
      */
     public function findMode(Node $root): array
     {
-        if ($root->left == null && $root->right == null) {
+        if ($root->left === null && $root->right === null) {
             return [$root->val];
         }
 
         $this->dfs($root);
 
-        print_r($this->modes);
         return $this->modes;
     }
 
-    protected function dfs(?Node $node)
+    protected function dfs(?Node $node): void
     {
         if ($node == null) {
             return;
@@ -39,6 +38,7 @@ class FindModeInBST
         if ($this->prevVal !== null && $node->val === $this->prevVal) {
             $this->currentFreq ++;
         } else {
+            $this->currentFreq = 1;
             $this->prevVal = $node->val;
         }
 
